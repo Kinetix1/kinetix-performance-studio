@@ -1,19 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Clock, Sun, Sunset, CalendarDays, MessageCircle } from "lucide-react";
 import { schedule, formatSlot } from "@/lib/schedule";
-import { trialLink } from "@/lib/site";
+import { trialLink, sessionJourney } from "@/lib/site";
 import { TrialButton } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
 import { BatchBoard } from "@/components/batch-board";
 
 export const Route = createFileRoute("/schedule")({ component: SchedulePage });
 
-const timeline = [
-  { range: "0–8", name: "Prep", detail: "Mobility and activation before load." },
-  { range: "8–25", name: "Strength", detail: "Progressive lifts at your coached load." },
-  { range: "25–40", name: "Conditioning", detail: "Intervals and circuits at controlled effort." },
-  { range: "40–45", name: "Reset", detail: "Cooldown and breathing to close the session." },
-];
+const formatColor: Record<string, string> = {
+  Strength: "border-blue-glow text-blue-glow",
+  Hybrid: "border-orange text-orange",
+  Cardio: "border-amber text-amber",
+};
 
 function SchedulePage() {
   const days = [...schedule.slice(1), schedule[0]!];
@@ -26,19 +25,16 @@ function SchedulePage() {
 
   return (
     <div className="pt-28 lg:pt-36">
-
       {/* Hero */}
       <section className="relative overflow-hidden pb-14">
         <div className="splatter pointer-events-none absolute inset-0" aria-hidden="true" />
         <div className="mx-auto max-w-6xl px-5">
           <Reveal>
             <p className="mono-label text-blue-glow">Schedule</p>
-            <h1 className="display skew-cut mt-4 text-[clamp(40px,8vw,72px)]">
-              Find your batch.
-            </h1>
+            <h1 className="display skew-cut mt-4 text-[clamp(40px,8vw,72px)]">Find your batch.</h1>
             <p className="mt-5 max-w-[56ch] text-[17px] text-white/70">
-              Six days a week. Morning and evening slots. Every session is 45 minutes — structured,
-              coached and ready to go the moment you walk in.
+              Six days a week. Morning and evening slots. 45 minutes Monday to Friday, 60 minutes on
+              Saturday — structured, coached and ready to go the moment you walk in.
             </p>
           </Reveal>
 
@@ -46,15 +42,17 @@ function SchedulePage() {
           <Reveal delay={0.08}>
             <div className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line sm:grid-cols-4">
               {[
-                { value: "45", unit: "MIN", label: "Every session" },
-                { value: "7", unit: "SLOTS", label: "Mon – Fri daily" },
+                { value: "45", unit: "MIN", label: "Mon – Fri sessions" },
+                { value: "60", unit: "MIN", label: "Saturday sessions" },
                 { value: "3", unit: "SLOTS", label: "Saturday" },
                 { value: "6", unit: "AM", label: "First batch" },
               ].map((s) => (
                 <div key={s.label} className="bg-ink px-6 py-6">
                   <p className="display text-[clamp(32px,5vw,48px)] leading-none">
                     {s.value}
-                    <span className="mono-label ml-1 align-super text-[11px] text-orange">{s.unit}</span>
+                    <span className="mono-label ml-1 align-super text-[11px] text-orange">
+                      {s.unit}
+                    </span>
                   </p>
                   <p className="mt-2 text-[13px] text-white/55">{s.label}</p>
                 </div>
@@ -72,7 +70,9 @@ function SchedulePage() {
         <div className="mx-auto max-w-6xl px-5">
           <Reveal>
             <p className="mono-label text-blue-glow">Weekly timetable</p>
-            <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">Every slot, every day</h2>
+            <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
+              Every slot, every day
+            </h2>
             <p className="mt-3 text-[15px] text-white/60">
               Tap any slot to open WhatsApp with that batch pre-filled.
             </p>
@@ -93,9 +93,18 @@ function SchedulePage() {
             </div>
             {weekdays.map((day, i) => (
               <Reveal key={day.label} delay={i * 0.03}>
-                <div className={`grid grid-cols-[auto_1fr_1fr] ${i < weekdays.length - 1 ? "border-b border-navy-line" : ""}`}>
-                  <div className="flex min-w-[80px] items-center px-5 py-4">
+                <div
+                  className={`grid grid-cols-[auto_1fr_1fr] ${i < weekdays.length - 1 ? "border-b border-navy-line" : ""}`}
+                >
+                  <div className="flex min-w-[120px] flex-col justify-center gap-1.5 px-5 py-4">
                     <span className="mono-label text-white/80">{day.shortLabel}</span>
+                    {day.format && (
+                      <span
+                        className={`mono-label inline-block w-fit rounded-[2px] border px-2 py-0.5 text-[10px] ${formatColor[day.format]}`}
+                      >
+                        {day.format}
+                      </span>
+                    )}
                   </div>
                   <div className="flex flex-wrap gap-2 border-l border-navy-line px-4 py-4">
                     {amSlots.map((slot) => {
@@ -141,6 +150,13 @@ function SchedulePage() {
                 <div className="flex items-center gap-2">
                   <CalendarDays size={14} className="text-orange" />
                   <p className="mono-label text-white/70">Saturday</p>
+                  {saturday.format && (
+                    <span
+                      className={`mono-label inline-block w-fit rounded-[2px] border px-2 py-0.5 text-[10px] ${formatColor[saturday.format]}`}
+                    >
+                      {saturday.format} · 60 MIN
+                    </span>
+                  )}
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {saturday.slots.map((slot) => {
@@ -168,7 +184,9 @@ function SchedulePage() {
                     <p className="mono-label text-white/40">Sunday</p>
                   </div>
                   <p className="mono-label mt-3 text-[18px] text-white/30">Closed</p>
-                  <p className="mt-1 text-[13px] text-white/40">Rest day. Back on the floor Monday 6 AM.</p>
+                  <p className="mt-1 text-[13px] text-white/40">
+                    Rest day. Back on the floor Monday 6 AM.
+                  </p>
                 </div>
               </div>
             </Reveal>
@@ -182,14 +200,14 @@ function SchedulePage() {
           <Reveal>
             <p className="mono-label text-orange">Inside a session</p>
             <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
-              45 minutes, fully accounted for
+              Every session, fully accounted for
             </h2>
           </Reveal>
-          <ol className="mt-8 grid gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line sm:grid-cols-2 lg:grid-cols-4">
-            {timeline.map((t, i) => (
+          <ol className="mt-8 grid gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line sm:grid-cols-2 lg:grid-cols-3">
+            {sessionJourney.map((t, i) => (
               <li key={t.name} className="bg-ink p-6">
                 <Reveal delay={i * 0.05}>
-                  <p className="mono-label text-orange">{t.range} MIN</p>
+                  <p className="mono-label text-orange">{t.step}</p>
                   <h3 className="display mt-3 text-[21px]">{t.name}</h3>
                   <p className="mt-2 text-[14px] text-white/65">{t.detail}</p>
                 </Reveal>
@@ -244,7 +262,8 @@ function SchedulePage() {
               Pick a slot. <span className="text-orange">We'll hold it.</span>
             </p>
             <p className="mt-5 text-[16px] text-ink/65">
-              Every timing above opens WhatsApp with the batch already filled in. First session is free.
+              Every timing above opens WhatsApp with the batch already filled in. First session is
+              free.
             </p>
             <div className="mt-8">
               <TrialButton variant="light" />
@@ -252,7 +271,6 @@ function SchedulePage() {
           </Reveal>
         </div>
       </section>
-
     </div>
   );
 }

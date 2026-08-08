@@ -4,9 +4,6 @@ export const site = {
   lockupLine: "SCIENCE • STRENGTH • PERFORMANCE",
   taglines: {
     commitment: "Choose your commitment. Transform your life.",
-    wealth:
-      "Health is the real wealth. Invest in your body today, and your future will thank you forever.",
-    stronger: "Stronger body. Stronger mind. Stronger you.",
   },
   phoneDisplay: "8886874545",
   phoneHref: "tel:+918886874545",
@@ -46,6 +43,45 @@ export function trialLink(slotLabel?: string) {
       : `Hi KINETIX, I'd like to book a free trial.`,
   );
 }
+
+export const sessionJourney = [
+  { step: "01", name: "Arrive", detail: "Come in, meet your coach and get ready on the floor." },
+  {
+    step: "02",
+    name: "Introduction & demo",
+    detail:
+      "Your coach introduces the workout of the day and demonstrates every movement in it, with progressions and regressions for your level.",
+  },
+  {
+    step: "03",
+    name: "Warm up",
+    detail: "Prepare your body and movement patterns before you load them.",
+  },
+  {
+    step: "04",
+    name: "Workout",
+    detail: "Follow your coach and the display timers through the day's structured session.",
+  },
+  { step: "05", name: "Finisher", detail: "A short, sharp full-body push to close out the work." },
+  {
+    step: "06",
+    name: "Cool down",
+    detail: "Recover, breathe and walk out feeling like you earned it.",
+  },
+] as const;
+
+export const trainingFormats = [
+  "HIIT",
+  "Functional Training",
+  "Strength",
+  "Conditioning",
+  "Athletic Performance",
+  "Mobility",
+  "Core",
+  "HYROX Training",
+  "Race Preparation",
+  "Group Training",
+] as const;
 
 export const nav = [
   { label: "Home", to: "/" },

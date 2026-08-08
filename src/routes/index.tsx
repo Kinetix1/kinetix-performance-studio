@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { Atom, Dumbbell, Footprints, MapPin, Phone, Clock } from "lucide-react";
-import mark from "@/assets/kinetix-mark.svg";
+import {
+  MapPin,
+  Phone,
+  Clock,
+  UserCheck,
+  PersonStanding,
+  Flame,
+  TrendingUp,
+  Users,
+  CheckCircle2,
+} from "lucide-react";
 import heroAthlete from "@/assets/hero-athlete.jpg";
 import strengthPhoto from "@/assets/strength.jpg";
 import conditioningPhoto from "@/assets/conditioning.jpg";
@@ -12,37 +21,61 @@ import { Photo } from "@/components/photo";
 import { BatchBoard } from "@/components/batch-board";
 import { CTA, TrialButton, LinkButton } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
-import { site } from "@/lib/site";
+import { site, sessionJourney, trainingFormats } from "@/lib/site";
 import { plans, inr, inclusionLine } from "@/lib/plans";
 
 export const Route = createFileRoute("/")({ component: Home });
 
-const pillars = [
+const differentiators = [
   {
-    eyebrow: "Science Guided",
-    line: "Every workout is designed with purpose.",
-    Icon: Atom,
-    color: "text-blue-glow",
+    name: "Coach-Led Training",
+    detail: "Every session is guided by experienced coaches, start to finish.",
+    Icon: UserCheck,
   },
   {
-    eyebrow: "Strength Built",
-    line: "Build strength that transforms your life.",
-    Icon: Dumbbell,
-    color: "text-blue",
+    name: "Functional Fitness",
+    detail: "Train movements that improve how you move in everyday life and sport.",
+    Icon: PersonStanding,
   },
   {
-    eyebrow: "Performance Driven",
-    line: "Move better. Perform better. Live better.",
-    Icon: Footprints,
-    color: "text-orange",
+    name: "HIIT & Conditioning",
+    detail: "Build cardiovascular fitness, work capacity and endurance.",
+    Icon: Flame,
+  },
+  {
+    name: "Progressive Programming",
+    detail: "Your workouts aren't random. They're structured to help you improve.",
+    Icon: TrendingUp,
+  },
+  {
+    name: "Community",
+    detail: "Train with people who push, encourage and celebrate each other.",
+    Icon: Users,
+  },
+  {
+    name: "All Fitness Levels",
+    detail: "Beginners and experienced athletes train together, with modifications for each.",
+    Icon: CheckCircle2,
   },
 ];
 
 const stats = [
-  { value: "45", unit: "MIN", label: "Every session, start to finish" },
+  { value: "45–60", unit: "MIN", label: "Every session, coach to cool-down" },
   { value: "12", unit: "MAX", label: "Members per coached batch" },
   { value: "6", unit: "AM", label: "First batch on the floor" },
   { value: "6", unit: "DAYS", label: "Monday to Saturday training" },
+];
+
+const whoFor = [
+  "You're tired of boring gym workouts",
+  "You want structured training",
+  "You want to lose body fat",
+  "You want to get stronger",
+  "You want better stamina",
+  "You want to improve mobility and movement",
+  "You enjoy training with a community",
+  "You're preparing for races or athletic events",
+  "You need accountability to stay consistent",
 ];
 
 const stories = [
@@ -60,7 +93,7 @@ const stories = [
   },
   {
     quote:
-      "Forty-five minutes fits between the school run and work. My back pain is gone and I deadlift twice my old load.",
+      "Never done HIIT before this. My coach scaled everything for week one and I still walked out drenched.",
     name: "Prateek M.",
     detail: "Member, 6 months",
   },
@@ -68,12 +101,12 @@ const stories = [
 
 const faqs = [
   {
-    q: "I've never trained before. Will I keep up?",
-    a: "Yes. Loads and movement options are set by your coach for your level, and the warm-up teaches the patterns before you load them.",
+    q: "I've never done HIIT before. Will I keep up?",
+    a: "Yes. Your coach demos every movement and sets loads and options for your level, so a first session is demanding without being reckless.",
   },
   {
-    q: "How big is a batch?",
-    a: "Capped so every member gets coaching eyes on their sets. Book ahead on WhatsApp for peak morning and evening slots.",
+    q: "How long is a session?",
+    a: "45 minutes Monday to Friday, 60 minutes on Saturday — introduction, demo, warm-up, workout, finisher and cool-down, every time.",
   },
   {
     q: "What should I bring?",
@@ -85,22 +118,15 @@ const faqs = [
   },
 ];
 
-const timeline = [
-  { range: "0–8", name: "Prep", detail: "Mobility and activation, so the working sets land safely." },
-  { range: "8–25", name: "Strength", detail: "Progressive lifts with coach-set loads for your level." },
-  { range: "25–40", name: "Conditioning", detail: "Intervals and functional circuits at a controlled effort." },
-  { range: "40–45", name: "Reset", detail: "Cooldown and breathing to finish the session properly." },
-];
-
 function HeroHeadline() {
   const reduced = useReducedMotion();
-  const words = ["45", "MINUTES.", "NO", "GUESSWORK."];
+  const words = ["NOT", "A", "GYM.", "A", "PERFORMANCE", "COMMUNITY."];
   return (
-    <h1 className="display text-[clamp(44px,10vw,96px)]">
+    <h1 className="display text-[clamp(38px,8vw,80px)]">
       {words.map((w, i) => (
         <motion.span
-          key={w}
-          className="mr-3 inline-block"
+          key={w + i}
+          className={`mr-3 inline-block ${w === "COMMUNITY." ? "text-orange" : ""}`}
           initial={reduced ? false : { opacity: 0, y: 24, skewX: -14 }}
           animate={{ opacity: 1, y: 0, skewX: -6 }}
           transition={{ duration: 0.5, delay: reduced ? 0 : i * 0.06, ease: "easeOut" }}
@@ -123,9 +149,13 @@ function Home() {
             <div className="mt-5">
               <HeroHeadline />
             </div>
-            <p className="mt-6 max-w-[68ch] text-white/75">
-              Science-backed group training in Kukatpally. Strength, conditioning and functional
-              work in one structured session.
+            <p className="mt-6 max-w-[62ch] text-white/75">
+              At Kinetix, every session is designed around HIIT, functional movement, strength,
+              conditioning and athletic performance.
+            </p>
+            <p className="mt-4 max-w-[62ch] text-[19px] font-semibold text-white">
+              You don&rsquo;t need to figure out what to do. You show up. We coach you. You put in
+              the work.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <TrialButton />
@@ -133,10 +163,10 @@ function Home() {
             </div>
           </div>
           <div className="relative">
-            <div className="absolute -inset-3 -z-10">
-              <div className="absolute inset-0 bg-blue/20" />
-              <div className="absolute inset-0 bg-orange/20 diagonal-split" />
-            </div>
+            <div
+              className="absolute -inset-3 -z-10 rounded-[6px] bg-gradient-to-br from-blue-glow to-orange"
+              aria-hidden="true"
+            />
             <Photo
               src={heroAthlete}
               alt="Member driving a kettlebell swing during a KINETIX session"
@@ -145,16 +175,7 @@ function Home() {
               ratio="aspect-[7/6]"
               priority
             />
-            <img
-              src={mark}
-              alt=""
-              aria-hidden="true"
-              width={677}
-              height={400}
-              className="pointer-events-none absolute -bottom-6 -left-6 hidden w-32 opacity-90 lg:block"
-            />
           </div>
-
         </div>
       </section>
 
@@ -162,17 +183,25 @@ function Home() {
 
       <section className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
-          <h2 className="display skew-cut text-[clamp(28px,5vw,40px)]">The system, in three parts</h2>
+          <p className="mono-label text-orange">Not a gym. A performance community.</p>
+          <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
+            Why train at Kinetix
+          </h2>
         </Reveal>
-        <div className="mt-10 grid divide-navy-line md:grid-cols-3 md:divide-x">
-          {pillars.map((p, i) => (
-            <Reveal key={p.eyebrow} delay={i * 0.05}>
-              <div className="border-t border-navy-line px-0 py-8 md:border-t-0 md:px-8 md:py-0">
-                <p.Icon size={28} strokeWidth={1.25} className={p.color} aria-hidden="true" />
-                <p className="mono-label mt-5 text-white/60">{p.eyebrow}</p>
-                <p className="mt-2 text-[21px] leading-snug">{p.line}</p>
-              </div>
-            </Reveal>
+        <div className="mt-10 grid gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line md:grid-cols-3">
+          {differentiators.map((p, i) => (
+            <div key={p.name} className="bg-ink p-8">
+              <Reveal delay={i * 0.04}>
+                <p.Icon
+                  size={28}
+                  strokeWidth={1.25}
+                  className="text-blue-glow"
+                  aria-hidden="true"
+                />
+                <h3 className="mt-5 text-[19px] font-semibold leading-snug">{p.name}</h3>
+                <p className="mt-2 text-[15px] text-white/65">{p.detail}</p>
+              </Reveal>
+            </div>
           ))}
         </div>
       </section>
@@ -182,7 +211,7 @@ function Home() {
           {stats.map((s, i) => (
             <div key={s.label} className="bg-ink px-6 py-10">
               <Reveal delay={i * 0.04}>
-                <p className="display text-[clamp(40px,7vw,64px)] leading-none">
+                <p className="display text-[clamp(32px,6vw,56px)] leading-none">
                   {s.value}
                   <span className="mono-label ml-2 align-super text-[12px] text-orange">
                     {s.unit}
@@ -195,27 +224,56 @@ function Home() {
         </div>
       </section>
 
-
+      <section className="mx-auto max-w-6xl px-5 py-20">
+        <Reveal>
+          <p className="mono-label text-blue-glow">Every day</p>
+          <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
+            A different challenge
+          </h2>
+          <p className="mt-4 max-w-[62ch] text-white/70">
+            HIIT and functional training sit at the centre of the programme — proven formats for
+            building strength, conditioning and real-world movement quality, all inside one
+            structured session.
+          </p>
+        </Reveal>
+        <div className="mt-8 flex flex-wrap gap-3">
+          {trainingFormats.map((f, i) => (
+            <Reveal key={f} delay={i * 0.02}>
+              <span className="mono-label inline-block rounded-[2px] border border-navy-line px-4 py-2 text-white/80">
+                {f}
+              </span>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
       <section className="border-y border-navy-line bg-navy/30 py-20">
         <div className="mx-auto max-w-6xl px-5">
           <Reveal>
-            <p className="mono-label text-blue-glow">How a session runs</p>
+            <p className="mono-label text-blue-glow">First time here?</p>
             <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
-              Forty-five minutes, accounted for
+              What happens in a session
             </h2>
+            <p className="mt-4 max-w-[56ch] text-white/70">
+              Kinetix isn&rsquo;t simply &ldquo;45 minutes of random exercises.&rdquo; Here&rsquo;s
+              exactly what happens when you walk in.
+            </p>
           </Reveal>
-          <ol className="mt-10 grid gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line md:grid-cols-4">
-            {timeline.map((t, i) => (
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-[4px] border border-navy-line bg-navy-line sm:grid-cols-2 lg:grid-cols-3">
+            {sessionJourney.map((t, i) => (
               <li key={t.name} className="bg-ink p-6">
                 <Reveal delay={i * 0.05}>
-                  <p className="mono-label text-orange">{t.range} MIN</p>
+                  <p className="mono-label text-orange">{t.step}</p>
                   <h3 className="display mt-3 text-[21px]">{t.name}</h3>
                   <p className="mt-2 text-[15px] text-white/70">{t.detail}</p>
                 </Reveal>
               </li>
             ))}
           </ol>
+          <p className="mono-label mt-6 text-white/50">
+            Then it&rsquo;s high fives all around — every session ends with the group, not just the
+            workout.
+          </p>
         </div>
       </section>
 
@@ -231,9 +289,9 @@ function Home() {
           <p className="mono-label mt-6 text-blue-glow">New to training</p>
           <h2 className="display skew-cut mt-3 text-[28px]">Start strong</h2>
           <p className="mt-4 text-white/75">
-            Every session is scalable. Your coach sets loads and options for your level, so a first
-            week feels demanding without being reckless. No guesswork about what to do next — the
-            programme decides, you show up.
+            Every session is scalable. Your coach sets loads and movement options for your level, so
+            a first week feels demanding without being reckless. No guesswork about what to do next
+            — the programme decides, you show up.
           </p>
         </Reveal>
         <Reveal delay={0.05}>
@@ -251,7 +309,6 @@ function Home() {
             holds standards. The group format keeps the intensity honest and consistency high.
           </p>
         </Reveal>
-
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20">
@@ -287,33 +344,77 @@ function Home() {
         </div>
       </section>
 
-
       <section className="border-y border-navy-line bg-navy/30 py-20">
         <div className="mx-auto max-w-6xl px-5">
           <Reveal>
-            <p className="mono-label text-blue-glow">On the floor</p>
+            <p className="mono-label text-blue-glow">Who is Kinetix for?</p>
             <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
-              What members say
+              Kinetix is for you if&hellip;
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {stories.map((s, i) => (
-              <Reveal key={s.name} delay={i * 0.05}>
-                <figure className="flex h-full flex-col justify-between rounded-[4px] border border-navy-line bg-ink p-6">
-                  <span aria-hidden="true" className="display text-[40px] leading-none text-orange">
-                    &ldquo;
-                  </span>
-                  <blockquote className="mt-2 text-[17px] leading-snug text-white/85">
-                    {s.quote}
-                  </blockquote>
-                  <figcaption className="mt-6 border-t border-navy-line pt-4">
-                    <p className="mono-label text-white/90">{s.name}</p>
-                    <p className="mono-label mt-1 text-white/45">{s.detail}</p>
-                  </figcaption>
-                </figure>
+          <ul className="mt-10 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+            {whoFor.map((w, i) => (
+              <Reveal key={w} delay={i * 0.03}>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2
+                    size={18}
+                    className="mt-0.5 shrink-0 text-orange"
+                    aria-hidden="true"
+                  />
+                  <span className="text-white/85">{w}</span>
+                </li>
               </Reveal>
             ))}
-          </div>
+          </ul>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 py-20">
+        <Reveal>
+          <p className="mono-label text-orange">On the floor</p>
+          <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">What members say</h2>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {stories.map((s, i) => (
+            <Reveal key={s.name} delay={i * 0.05}>
+              <figure className="flex h-full flex-col justify-between rounded-[4px] border border-navy-line bg-ink p-6">
+                <span aria-hidden="true" className="display text-[40px] leading-none text-orange">
+                  &ldquo;
+                </span>
+                <blockquote className="mt-2 text-[17px] leading-snug text-white/85">
+                  {s.quote}
+                </blockquote>
+                <figcaption className="mt-6 border-t border-navy-line pt-4">
+                  <p className="mono-label text-white/90">{s.name}</p>
+                  <p className="mono-label mt-1 text-white/45">{s.detail}</p>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-navy-line bg-navy/30 py-20">
+        <div className="mx-auto max-w-3xl px-5 text-center">
+          <Reveal>
+            <p className="mono-label text-blue-glow">First time here?</p>
+            <h2 className="display skew-cut mt-4 text-[clamp(30px,6vw,52px)]">
+              Never done HIIT before? <span className="text-orange">That&rsquo;s okay.</span>
+            </h2>
+            <p className="mt-5 text-[17px] text-white/85">
+              You don&rsquo;t need to be fit before joining Kinetix.
+            </p>
+            <p className="mt-3 text-[17px] text-white/75">
+              Our coaches modify movements, intensity and loads according to your fitness level.
+            </p>
+            <p className="mt-5 text-[19px] font-semibold text-white">
+              You don&rsquo;t compete against the person next to you. You compete against the
+              version of yourself that walked through the door yesterday.
+            </p>
+            <div className="mt-8">
+              <TrialButton />
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -352,8 +453,6 @@ function Home() {
           </Reveal>
         </div>
       </section>
-
-
 
       <section className="border-t border-navy-line py-20">
         <div className="mx-auto max-w-6xl px-5">
@@ -395,21 +494,47 @@ function Home() {
           <div className="mt-4 rounded-[4px] border border-navy-line px-6 py-4">
             <p className="mono-label text-white/70">{inclusionLine}</p>
           </div>
-          <div className="mt-8">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <LinkButton to="/membership">View all plans</LinkButton>
+            <span className="mono-label text-white/50">
+              Not sure which option is right for you?
+            </span>
+            <TrialButton />
           </div>
         </div>
       </section>
 
       <section className="bg-paper py-20 text-ink">
-        <div className="mx-auto max-w-4xl px-5 text-center">
-          <p className="display text-[clamp(28px,5.5vw,64px)]">
-            Health is the <span className="text-orange">real</span>{" "}
-            <span className="text-orange">wealth</span>.
+        <div className="mx-auto max-w-3xl px-5 text-center">
+          <p className="mono-label text-orange">Why Kinetix</p>
+          <p className="display mt-4 text-[clamp(26px,5vw,44px)]">
+            You don&rsquo;t need another membership.
           </p>
-          <p className="mt-6 text-[17px] text-ink/70">
-            Invest in your body today, and your future will thank you forever.
-          </p>
+          <div className="mt-6 space-y-1.5 text-[17px] text-ink/70">
+            <p>You need a place that makes you show up.</p>
+            <p>A place where your coach knows your name.</p>
+            <p>Where people notice when you&rsquo;re missing.</p>
+            <p>Where workouts challenge you.</p>
+            <p>Where progress gets celebrated.</p>
+            <p>Where fitness becomes part of your lifestyle.</p>
+          </div>
+          <p className="display mt-8 text-[28px] text-orange">That&rsquo;s Kinetix.</p>
+        </div>
+      </section>
+
+      <section className="border-t border-navy-line py-20">
+        <div className="mx-auto max-w-3xl px-5 text-center">
+          <Reveal>
+            <p className="display text-[clamp(28px,5.5vw,56px)]">
+              Ready to experience <span className="text-orange">Kinetix</span>?
+            </p>
+            <p className="mt-5 text-[16px] text-white/70">
+              Don&rsquo;t take our word for it. Come train with us.
+            </p>
+            <div className="mt-8">
+              <TrialButton>Book your trial session</TrialButton>
+            </div>
+          </Reveal>
         </div>
       </section>
 

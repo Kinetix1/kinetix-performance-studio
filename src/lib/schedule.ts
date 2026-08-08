@@ -1,14 +1,22 @@
 export type Slot = { hour: number; minute: number };
 
+export type Format = "Strength" | "Hybrid" | "Cardio";
+
+export const formatDetail: Record<Format, string> = {
+  Strength: "Progressive resistance work, coached loads for your level.",
+  Hybrid: "Strength and conditioning combined in the same session.",
+  Cardio: "HIIT and conditioning intervals to build engine and work capacity.",
+};
+
 export type DaySchedule = {
   /** 0 = Sunday .. 6 = Saturday */
   day: number;
   label: string;
   shortLabel: string;
   slots: Slot[];
+  format: Format | null;
+  sessionMinutes: number;
 };
-
-export const SESSION_MINUTES = 45;
 
 const weekday: Slot[] = [
   { hour: 6, minute: 0 },
@@ -21,12 +29,47 @@ const weekday: Slot[] = [
 ];
 
 export const schedule: DaySchedule[] = [
-  { day: 0, label: "Sunday", shortLabel: "SUN", slots: [] },
-  { day: 1, label: "Monday", shortLabel: "MON", slots: weekday },
-  { day: 2, label: "Tuesday", shortLabel: "TUE", slots: weekday },
-  { day: 3, label: "Wednesday", shortLabel: "WED", slots: weekday },
-  { day: 4, label: "Thursday", shortLabel: "THU", slots: weekday },
-  { day: 5, label: "Friday", shortLabel: "FRI", slots: weekday },
+  { day: 0, label: "Sunday", shortLabel: "SUN", slots: [], format: null, sessionMinutes: 0 },
+  {
+    day: 1,
+    label: "Monday",
+    shortLabel: "MON",
+    slots: weekday,
+    format: "Strength",
+    sessionMinutes: 45,
+  },
+  {
+    day: 2,
+    label: "Tuesday",
+    shortLabel: "TUE",
+    slots: weekday,
+    format: "Hybrid",
+    sessionMinutes: 45,
+  },
+  {
+    day: 3,
+    label: "Wednesday",
+    shortLabel: "WED",
+    slots: weekday,
+    format: "Strength",
+    sessionMinutes: 45,
+  },
+  {
+    day: 4,
+    label: "Thursday",
+    shortLabel: "THU",
+    slots: weekday,
+    format: "Cardio",
+    sessionMinutes: 45,
+  },
+  {
+    day: 5,
+    label: "Friday",
+    shortLabel: "FRI",
+    slots: weekday,
+    format: "Strength",
+    sessionMinutes: 45,
+  },
   {
     day: 6,
     label: "Saturday",
@@ -36,6 +79,8 @@ export const schedule: DaySchedule[] = [
       { hour: 7, minute: 30 },
       { hour: 9, minute: 0 },
     ],
+    format: "Hybrid",
+    sessionMinutes: 60,
   },
 ];
 
@@ -95,7 +140,7 @@ export function getBoardState(now = nowIST()): BatchBoardState {
   let nextIndex = -1;
   const slots = today.slots.map((slot, i) => {
     const start = slotMinutes(slot);
-    const end = start + SESSION_MINUTES;
+    const end = start + today.sessionMinutes;
     let state: SlotState = "upcoming";
     if (now.minutesOfDay >= end) state = "past";
     else if (now.minutesOfDay >= start) state = "in-session";

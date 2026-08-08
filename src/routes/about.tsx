@@ -5,6 +5,15 @@ import { Reveal } from "@/components/reveal";
 import { TrialButton } from "@/components/cta";
 import { Photo } from "@/components/photo";
 import studioFloor from "@/assets/studio-floor.jpg";
+import coach1 from "@/assets/coach-1.jpg";
+import coach2 from "@/assets/coach-2.jpg";
+import coach3 from "@/assets/coach-3.jpg";
+
+const coaches = [
+  { photo: coach1, alt: "KINETIX coach in the studio" },
+  { photo: coach2, alt: "KINETIX coach in the studio" },
+  { photo: coach3, alt: "KINETIX coach in the studio" },
+];
 
 export const Route = createFileRoute("/about")({ component: About });
 
@@ -36,25 +45,26 @@ function About() {
   return (
     <div className="pt-28 lg:pt-36">
       <section className="mx-auto max-w-6xl px-5 pb-16">
-        <p className="mono-label text-blue-glow">{site.lockupLine}</p>
+        <p className="mono-label text-blue-glow">Not a gym. A performance community.</p>
         <h1 className="display skew-cut mt-4 text-[clamp(40px,8vw,64px)]">
           A studio built to remove the guesswork
         </h1>
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div className="max-w-[68ch] space-y-5 text-white/80">
             <p>
-              KINETIX Performance Studio is a results-driven fitness and performance studio in
-              Kukatpally, Hyderabad. We run structured, high-energy group training on science-backed
-              programming — efficient 45-minute workouts that combine strength, conditioning and
-              functional training.
+              KINETIX Performance Studio is a results-driven performance community in Kukatpally,
+              Hyderabad — not a gym you wander into alone. Every session is built around HIIT and
+              functional training, the two formats proven to build strength, conditioning and
+              real-world movement quality fastest, alongside structured strength and athletic
+              performance work.
             </p>
             <p>
               There is no guesswork here. A proven system decides the session, expert coaching runs
               it, and a community keeps consistency high week after week.
             </p>
             <p>
-              Every session is scalable for every level, so beginners start strong and experienced
-              members push their limits — in the same room, on the same plan, at their own loads.
+              Every session is suitable for all levels — beginners start strong and experienced
+              members push their limits, in the same room, on the same plan, at their own loads.
             </p>
           </div>
           <Photo
@@ -85,12 +95,21 @@ function About() {
       <section className="mx-auto max-w-6xl px-5 py-16">
         <Reveal>
           <p className="mono-label text-blue-glow">Coaching team</p>
-          <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">A team that holds the standard</h2>
+          <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
+            A team that holds the standard
+          </h2>
           <p className="mt-4 max-w-[62ch] text-white/70">
-            Every session is run by coaches who know the programme, watch every rep and keep the
-            room honest. The standard doesn't drop because the team doesn't let it.
+            Every session is run by coaches who know the programme, demo every movement, watch every
+            rep and keep the room honest. The standard doesn't drop because the team doesn't let it.
           </p>
         </Reveal>
+        <div className="mt-10 grid gap-4 sm:grid-cols-3">
+          {coaches.map((c, i) => (
+            <Reveal key={c.photo} delay={i * 0.05}>
+              <Photo src={c.photo} alt={c.alt} width={912} height={1120} ratio="aspect-[4/5]" />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <section className="bg-paper py-20 text-ink">

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, Plus, Minus } from "lucide-react";
-import { plans, inr, inclusionLine, faqs } from "@/lib/plans";
+import { plans, inr, inclusionLine, faqs, faqCategories } from "@/lib/plans";
 import { site } from "@/lib/site";
 import { TrialButton } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
@@ -35,11 +35,21 @@ function Membership() {
               <caption className="sr-only">KINETIX membership plans and pricing</caption>
               <thead>
                 <tr className="border-b border-ink/10 bg-white">
-                  <th scope="col" className="mono-label p-5 text-ink/60">Plan</th>
-                  <th scope="col" className="mono-label p-5 text-ink/60">Price</th>
-                  <th scope="col" className="mono-label p-5 text-ink/60">Works out to</th>
-                  <th scope="col" className="mono-label p-5 text-ink/60">vs monthly</th>
-                  <th scope="col" className="mono-label p-5 text-ink/60">Includes</th>
+                  <th scope="col" className="mono-label p-5 text-ink/60">
+                    Plan
+                  </th>
+                  <th scope="col" className="mono-label p-5 text-ink/60">
+                    Price
+                  </th>
+                  <th scope="col" className="mono-label p-5 text-ink/60">
+                    Works out to
+                  </th>
+                  <th scope="col" className="mono-label p-5 text-ink/60">
+                    vs monthly
+                  </th>
+                  <th scope="col" className="mono-label p-5 text-ink/60">
+                    Includes
+                  </th>
                   <th scope="col" className="mono-label p-5 text-ink/60">
                     <span className="sr-only">Book</span>
                   </th>
@@ -130,36 +140,63 @@ function Membership() {
         <Reveal>
           <p className="mono-label text-blue-glow">Questions</p>
           <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">Before you join</h2>
+          <p className="mt-4 max-w-[56ch] text-white/70">
+            Everything a first-timer usually asks, grouped so it&rsquo;s easy to scan. Still stuck?
+            Message us on WhatsApp.
+          </p>
         </Reveal>
-        <div className="mt-8 border-t border-navy-line">
-          {faqs.map((f) => {
-            const isOpen = open === f.q;
-            return (
-              <div key={f.q} className="border-b border-navy-line">
-                <h3>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : f.q)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
-                  >
-                    <span className="text-[17px] font-medium">{f.q}</span>
-                    {isOpen ? (
-                      <Minus size={18} className="shrink-0 text-orange" aria-hidden="true" />
-                    ) : (
-                      <Plus size={18} className="shrink-0 text-blue-glow" aria-hidden="true" />
-                    )}
-                  </button>
-                </h3>
-                {isOpen && (
-                  <p className={`pb-5 ${f.todo ? "mono-label text-orange" : "text-white/75"}`}>
-                    {f.a}
-                  </p>
-                )}
+
+        <div className="mt-10 space-y-10">
+          {faqCategories.map((category, ci) => (
+            <Reveal key={category} delay={ci * 0.05}>
+              <div>
+                <p className="mono-label text-orange">{category}</p>
+                <div className="mt-3 border-t border-navy-line">
+                  {faqs
+                    .filter((f) => f.category === category)
+                    .map((f) => {
+                      const isOpen = open === f.q;
+                      return (
+                        <div key={f.q} className="border-b border-navy-line">
+                          <h3>
+                            <button
+                              type="button"
+                              onClick={() => setOpen(isOpen ? null : f.q)}
+                              aria-expanded={isOpen}
+                              className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                            >
+                              <span className="text-[17px] font-medium">{f.q}</span>
+                              {isOpen ? (
+                                <Minus
+                                  size={18}
+                                  className="shrink-0 text-orange"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <Plus
+                                  size={18}
+                                  className="shrink-0 text-blue-glow"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </button>
+                          </h3>
+                          {isOpen && (
+                            <p
+                              className={`pb-5 ${f.todo ? "mono-label text-orange" : "text-white/75"}`}
+                            >
+                              {f.a}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
+
         <div className="mt-10">
           <TrialButton />
         </div>

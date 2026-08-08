@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram } from "lucide-react";
-import mark from "@/assets/kinetix-mark.svg";
+import lockup from "@/assets/kinetix-lockup.png";
 import { nav, site } from "@/lib/site";
 
 export function Footer() {
@@ -8,8 +8,13 @@ export function Footer() {
     <footer className="border-t border-navy-line bg-navy/20 pb-24 pt-16 lg:pb-16">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-4">
         <div className="md:col-span-1">
-          <img src={mark} alt={`${site.name} mark`} width={169} height={100} className="h-14 w-auto" />
-          <p className="mono-label mt-4 text-blue-glow">{site.lockupLine}</p>
+          <img
+            src={lockup}
+            alt={`${site.name} logo`}
+            width={1214}
+            height={1050}
+            className="h-32 w-auto"
+          />
         </div>
 
         <nav aria-label="Footer">
@@ -29,10 +34,14 @@ export function Footer() {
           <p className="mono-label text-white/50">Contact</p>
           <ul className="mt-4 space-y-2 text-[15px] text-white/75">
             <li>
-              <a href={site.phoneHref} className="hover:text-orange">{site.phoneDisplay}</a>
+              <a href={site.phoneHref} className="hover:text-orange">
+                {site.phoneDisplay}
+              </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="break-all hover:text-orange">{site.email}</a>
+              <a href={`mailto:${site.email}`} className="break-all hover:text-orange">
+                {site.email}
+              </a>
             </li>
             <li>{site.address.full}</li>
           </ul>
@@ -72,7 +81,9 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-12 max-w-6xl border-t border-navy-line px-5 pt-6">
-        <p className="mono-label text-white/40">© {new Date().getFullYear()} {site.name}</p>
+        <p className="mono-label text-white/40">
+          © {new Date().getFullYear()} {site.name}
+        </p>
       </div>
     </footer>
   );
