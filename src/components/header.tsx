@@ -1,0 +1,107 @@
+import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
+import mark from "@/assets/kinetix-mark.svg";
+import { nav, site, trialLink } from "@/lib/site";
+import { CTA } from "@/components/cta";
+
+export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "border-b border-navy-line bg-ink" : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <Link to="/" className="flex items-center gap-3" aria-label={`${site.name} home`}>
+          <img src={mark} alt={`${site.name} logo`} width={68} height={40} className="h-10 w-auto" />
+          <span className="leading-none">
+            <span className="display block text-[21px]">Kinetix</span>
+            <span className="mono-label block text-[9px] text-white/55">Performance Studio</span>
+          </span>
+        </Link>
+
+        <nav aria-label="Main" className="hidden items-center gap-6 lg:flex">
+          {nav.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="mono-label text-white/70 transition-colors hover:text-blue-glow"
+              activeProps={{ className: "mono-label text-orange" }}
+              activeOptions={{ exact: item.to === "/" }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a href={trialLink()} target="_blank" rel="noreferrer">
+            <CTA>Book a free trial</CTA>
+          </a>
+        </nav>
+
+        <button
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className="rounded-[2px] border border-navy-line p-2 lg:hidden"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {open && (
+        <nav aria-label="Mobile" className="border-t border-navy-line bg-ink px-5 pb-6 pt-4 lg:hidden">
+          <ul className="space-y-4">
+            {nav.map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  onClick={() => setOpen(false)}
+                  className="mono-label block text-white/80"
+                  activeProps={{ className: "mono-label block text-orange" }}
+                  activeOptions={{ exact: item.to === "/" }}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a href={trialLink()} target="_blank" rel="noreferrer" className="mt-6 block">
+            <CTA className="w-full">Book a free trial</CTA>
+          </a>
+        </nav>
+      )}
+    </header>
+  );
+}
+
+export function MobileCallBar() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 border-t border-navy-line bg-ink lg:hidden">
+      <a
+        href={site.phoneHref}
+        className="mono-label flex items-center justify-center gap-2 py-4 text-white"
+      >
+        <Phone size={16} /> Call
+      </a>
+      <a
+        href={trialLink()}
+        target="_blank"
+        rel="noreferrer"
+        className="mono-label flex items-center justify-center gap-2 bg-orange py-4 text-white"
+      >
+        <MessageCircle size={16} /> WhatsApp
+      </a>
+    </div>
+  );
+}

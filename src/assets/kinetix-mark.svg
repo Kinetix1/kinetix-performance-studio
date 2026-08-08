@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="#060D1C"/>
+  <!-- K shape -->
+  <rect x="8" y="10" width="6" height="44" fill="#0B5FD8"/>
+  <polygon points="14,32 32,10 40,10 22,32 40,54 32,54" fill="#35A7FF"/>
+  <!-- X shape -->
+  <line x1="36" y1="10" x2="58" y2="54" stroke="#F2621E" stroke-width="6" stroke-linecap="square"/>
+  <line x1="58" y1="10" x2="36" y2="54" stroke="#F2621E" stroke-width="6" stroke-linecap="square"/>
+</svg>
