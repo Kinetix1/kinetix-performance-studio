@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/reveal";
 import { TrialButton } from "@/components/cta";
 import { Photo } from "@/components/photo";
-import strengthPhoto from "@/assets/strength.jpg";
-import conditioningPhoto from "@/assets/conditioning.jpg";
-import heroAthlete from "@/assets/hero-athlete.jpg";
-import studioFloor from "@/assets/studio-floor.jpg";
+import strengthPhoto from "@/assets/gallery/member-barbell-deadlift-setup-2.webp";
+import conditioningPhoto from "@/assets/gallery/member-band-chest-row.webp";
+import kettlebellPhoto from "@/assets/gallery/member-kettlebell-floor-setup.webp";
+import circuitPhoto from "@/assets/gallery/member-plank-medicine-balls-mural.webp";
 import { trainingFormats } from "@/lib/site";
 
 export const Route = createFileRoute("/programs")({ component: Programs });
@@ -13,7 +13,10 @@ export const Route = createFileRoute("/programs")({ component: Programs });
 const programs = [
   {
     photo: strengthPhoto,
-    photoAlt: "Coached barbell strength work in the studio",
+    photoAlt: "Member setting up for a coached barbell deadlift",
+    photoWidth: 720,
+    photoHeight: 1280,
+    photoRatio: "aspect-[4/5]",
     name: "POWER HOUSE",
     tagline: "Functional strength and resistance.",
     days: "Monday · Wednesday · Friday",
@@ -24,7 +27,10 @@ const programs = [
   },
   {
     photo: conditioningPhoto,
-    photoAlt: "Conditioning intervals on ropes and rower",
+    photoAlt: "Member rowing a resistance band during a conditioning interval",
+    photoWidth: 720,
+    photoHeight: 1280,
+    photoRatio: "aspect-[4/5]",
     name: "VELOCITY",
     tagline: "High-intensity conditioning.",
     days: "Thursday",
@@ -34,8 +40,11 @@ const programs = [
       "Scalable for every level. Beginners run a version they can finish; experienced members run one that pushes their limits.",
   },
   {
-    photo: heroAthlete,
-    photoAlt: "Kettlebell swing during functional training",
+    photo: kettlebellPhoto,
+    photoAlt: "Member swinging a kettlebell during functional training",
+    photoWidth: 720,
+    photoHeight: 1280,
+    photoRatio: "aspect-[4/5]",
     name: "OVERDRIVE",
     tagline: "Push your cardiovascular capacity.",
     days: "Tuesday · Saturday",
@@ -45,8 +54,11 @@ const programs = [
       "Coached with the same science-backed programming as the rest of the week, with regressions and progressions ready.",
   },
   {
-    photo: studioFloor,
-    photoAlt: "The KINETIX studio floor set up for a group session",
+    photo: circuitPhoto,
+    photoAlt: "Member training a plank circuit with medicine balls on the KINETIX studio floor",
+    photoWidth: 720,
+    photoHeight: 1280,
+    photoRatio: "aspect-[4/5]",
     name: "HIGHLIGHT",
     tagline: "A full-body super circuit.",
     days: "Tuesday · Saturday",
@@ -92,10 +104,11 @@ function Programs() {
                 <Photo
                   src={p.photo}
                   alt={p.photoAlt}
-                  width={1200}
-                  height={912}
-                  ratio="aspect-[4/3]"
-                  className="mt-6"
+                  width={p.photoWidth}
+                  height={p.photoHeight}
+                  ratio={p.photoRatio}
+                  focus="top"
+                  className="mt-6 max-w-sm"
                 />
               </div>
               <dl className="space-y-6">

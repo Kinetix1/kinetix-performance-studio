@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 import { TrialButton } from "@/components/cta";
 import { Photo } from "@/components/photo";
-import studioFloor from "@/assets/studio-floor.jpg";
+import studioFloor from "@/assets/studio-floor-equipment-rack.webp";
 import coach1 from "@/assets/coach-1.jpg";
 import coach2 from "@/assets/coach-2.jpg";
 import coach3 from "@/assets/coach-3.jpg";
@@ -69,9 +69,9 @@ function About() {
           </div>
           <Photo
             src={studioFloor}
-            alt="Racks, turf lane and kettlebells on the KINETIX studio floor"
-            width={1600}
-            height={1008}
+            alt="Member training on the KINETIX studio floor beside the equipment rack"
+            width={606}
+            height={736}
             ratio="aspect-[4/5]"
           />
         </div>

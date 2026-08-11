@@ -6,6 +6,7 @@ type PhotoProps = {
   ratio?: string;
   className?: string;
   priority?: boolean;
+  focus?: "top" | "center";
 };
 
 /**
@@ -20,6 +21,7 @@ export function Photo({
   ratio = "aspect-[4/3]",
   className = "",
   priority = false,
+  focus = "center",
 }: PhotoProps) {
   return (
     <figure
@@ -31,7 +33,7 @@ export function Photo({
         width={width}
         height={height}
         loading={priority ? "eager" : "lazy"}
-        className="h-full w-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.06]"
+        className={`h-full w-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.06] ${focus === "top" ? "object-top" : "object-center"}`}
       />
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"

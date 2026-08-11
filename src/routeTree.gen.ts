@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as ScheduleRouteImport } from './routes/schedule'
@@ -29,6 +30,11 @@ const AboutRoute = AboutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MembershipRoute = MembershipRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/membership': typeof MembershipRoute
   '/programs': typeof ProgramsRoute
   '/schedule': typeof ScheduleRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/membership': typeof MembershipRoute
   '/programs': typeof ProgramsRoute
   '/schedule': typeof ScheduleRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/gallery': typeof GalleryRoute
   '/membership': typeof MembershipRoute
   '/programs': typeof ProgramsRoute
   '/schedule': typeof ScheduleRoute
@@ -75,14 +84,28 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/contact' | '/membership' | '/programs' | '/schedule'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/gallery'
+    | '/membership'
+    | '/programs'
+    | '/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/membership' | '/programs' | '/schedule'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/gallery'
+    | '/membership'
+    | '/programs'
+    | '/schedule'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
+    | '/gallery'
     | '/membership'
     | '/programs'
     | '/schedule'
@@ -92,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  GalleryRoute: typeof GalleryRoute
   MembershipRoute: typeof MembershipRoute
   ProgramsRoute: typeof ProgramsRoute
   ScheduleRoute: typeof ScheduleRoute
@@ -118,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/membership': {
@@ -148,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  GalleryRoute: GalleryRoute,
   MembershipRoute: MembershipRoute,
   ProgramsRoute: ProgramsRoute,
   ScheduleRoute: ScheduleRoute,

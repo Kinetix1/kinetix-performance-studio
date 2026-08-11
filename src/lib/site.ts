@@ -88,6 +88,7 @@ export const nav = [
   { label: "Programs", to: "/programs" },
   { label: "Membership", to: "/membership" },
   { label: "Schedule", to: "/schedule" },
+  { label: "Gallery", to: "/gallery" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ] as const;

@@ -11,11 +11,19 @@ import {
   Users,
   CheckCircle2,
 } from "lucide-react";
-import heroAthlete from "@/assets/hero-athlete.jpg";
-import strengthPhoto from "@/assets/strength.jpg";
-import conditioningPhoto from "@/assets/conditioning.jpg";
-import communityPhoto from "@/assets/kinetix-community.jpg";
-import membersPhoto from "@/assets/kinetix-members.jpg";
+import heroAthlete from "@/assets/hero-kettlebell-overhead-swing.webp";
+import strengthPhoto from "@/assets/barbell-deadlift-setup.webp";
+import conditioningPhoto from "@/assets/rowing-machine-conditioning.webp";
+import communityPhoto from "@/assets/studio-mural-band-training.webp";
+import membersPhoto from "@/assets/barbell-front-squat-studio.webp";
+import galleryKettlebellSwing from "@/assets/gallery/member-kettlebell-swing.webp";
+import galleryBarbellPress from "@/assets/gallery/member-barbell-overhead-press.webp";
+import galleryGobletSquat from "@/assets/gallery/member-medicine-ball-goblet-squat.webp";
+import galleryBandTraining from "@/assets/gallery/member-band-pull-overhead-mural.webp";
+import galleryDumbbellSquat from "@/assets/gallery/member-dual-dumbbell-squat.webp";
+import galleryFarmersCarry from "@/assets/gallery/member-kettlebell-farmers-carry.webp";
+import galleryCoreWork from "@/assets/gallery/member-plank-medicine-ball-mural.webp";
+import gallerySandbagCarry from "@/assets/gallery/member-sandbag-carry.webp";
 import { Photo } from "@/components/photo";
 
 import { BatchBoard } from "@/components/batch-board";
@@ -76,6 +84,49 @@ const whoFor = [
   "You enjoy training with a community",
   "You're preparing for races or athletic events",
   "You need accountability to stay consistent",
+];
+
+const galleryHighlights = [
+  {
+    src: galleryKettlebellSwing,
+    alt: "Member swinging a kettlebell on the studio floor",
+    label: "Kettlebell Swing",
+  },
+  {
+    src: galleryBarbellPress,
+    alt: "Member pressing a barbell overhead in front of the KINETIX mural",
+    label: "Barbell Press",
+  },
+  {
+    src: galleryGobletSquat,
+    alt: "Member holding a medicine ball goblet squat",
+    label: "Goblet Squat",
+  },
+  {
+    src: galleryBandTraining,
+    alt: "Member pulling a resistance band overhead in front of the KINETIX mural",
+    label: "Band Training",
+  },
+  {
+    src: galleryDumbbellSquat,
+    alt: "Member holding a dual dumbbell rack squat",
+    label: "Dumbbell Squat",
+  },
+  {
+    src: galleryFarmersCarry,
+    alt: "Member carrying kettlebells across the studio floor",
+    label: "Farmer's Carry",
+  },
+  {
+    src: galleryCoreWork,
+    alt: "Member holding a plank on a medicine ball in front of the KINETIX mural",
+    label: "Core Work",
+  },
+  {
+    src: gallerySandbagCarry,
+    alt: "Member carrying a sandbag on the studio floor",
+    label: "Sandbag Carry",
+  },
 ];
 
 const stories = [
@@ -169,10 +220,11 @@ function Home() {
             />
             <Photo
               src={heroAthlete}
-              alt="Member driving a kettlebell swing during a KINETIX session"
-              width={1408}
-              height={1200}
-              ratio="aspect-[7/6]"
+              alt="Member driving a kettlebell overhead swing during a KINETIX session"
+              width={720}
+              height={1280}
+              ratio="aspect-[4/5]"
+              focus="top"
               priority
             />
           </div>
@@ -281,10 +333,12 @@ function Home() {
         <Reveal>
           <Photo
             src={strengthPhoto}
-            alt="Members setting up for a coached barbell lift"
-            width={1200}
-            height={912}
-            ratio="aspect-[4/3]"
+            alt="Member setting up for a coached barbell deadlift"
+            width={720}
+            height={1280}
+            ratio="aspect-[4/5]"
+            focus="top"
+            className="max-w-sm"
           />
           <p className="mono-label mt-6 text-blue-glow">New to training</p>
           <h2 className="display skew-cut mt-3 text-[28px]">Start strong</h2>
@@ -297,10 +351,12 @@ function Home() {
         <Reveal delay={0.05}>
           <Photo
             src={conditioningPhoto}
-            alt="Member working a rope and rower conditioning interval"
-            width={1200}
-            height={912}
-            ratio="aspect-[4/3]"
+            alt="Member driving a rowing machine sprint during a conditioning interval"
+            width={448}
+            height={737}
+            ratio="aspect-[4/5]"
+            focus="top"
+            className="max-w-sm"
           />
           <p className="mono-label mt-6 text-orange">Already training</p>
           <h2 className="display skew-cut mt-3 text-[28px]">Push your limits</h2>
@@ -322,25 +378,58 @@ function Home() {
             with from your first session.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-4 lg:grid-cols-[1.45fr_1fr]">
+        <div className="mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
           <Reveal>
             <Photo
               src={communityPhoto}
-              alt="KINETIX members gathered in front of the studio mural after a batch"
-              width={1376}
-              height={768}
-              ratio="aspect-[16/9]"
+              alt="Member training in front of the KINETIX studio mural"
+              width={720}
+              height={1280}
+              ratio="aspect-[4/5]"
+              focus="top"
             />
           </Reveal>
           <Reveal delay={0.05}>
             <Photo
               src={membersPhoto}
-              alt="Two KINETIX members in front of the studio mural"
-              width={848}
-              height={1264}
+              alt="Member in a front-rack barbell squat on the KINETIX studio floor"
+              width={602}
+              height={732}
               ratio="aspect-[4/5]"
             />
           </Reveal>
+        </div>
+      </section>
+
+      <section className="border-t border-navy-line py-20">
+        <div className="mx-auto max-w-6xl px-5">
+          <Reveal>
+            <p className="mono-label text-orange">The full gallery</p>
+            <h2 className="display skew-cut mt-3 text-[clamp(28px,5vw,40px)]">
+              More from the floor
+            </h2>
+            <p className="mt-4 max-w-[62ch] text-white/70">
+              Every session, every batch, every rep — shot on the Kukatpally studio floor.
+            </p>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {galleryHighlights.map((photo, i) => (
+              <Reveal key={photo.src} delay={i * 0.04}>
+                <Photo
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={720}
+                  height={900}
+                  ratio="aspect-[4/5]"
+                  focus="top"
+                />
+                <p className="mono-label mt-3 text-white/60">{photo.label}</p>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-10">
+            <LinkButton to="/gallery">View full gallery</LinkButton>
+          </div>
         </div>
       </section>
 
