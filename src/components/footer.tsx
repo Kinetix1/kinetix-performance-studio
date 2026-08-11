@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram } from "lucide-react";
-import lockup from "@/assets/kinetix-lockup.png";
+import lockup from "@/assets/kinetix-lockup.webp";
 import { nav, site } from "@/lib/site";
 
 export function Footer() {
@@ -11,8 +11,8 @@ export function Footer() {
           <img
             src={lockup}
             alt={`${site.name} logo`}
-            width={1214}
-            height={1050}
+            width={693}
+            height={600}
             className="h-32 w-auto"
           />
         </div>

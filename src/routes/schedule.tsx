@@ -6,7 +6,19 @@ import { TrialButton } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
 import { BatchBoard } from "@/components/batch-board";
 
-export const Route = createFileRoute("/schedule")({ component: SchedulePage });
+export const Route = createFileRoute("/schedule")({
+  component: SchedulePage,
+  head: () => ({
+    meta: [
+      { title: "Schedule — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "Batch timings at KINETIX Performance Studio in Kukatpally, Hyderabad — Monday to Saturday, morning and evening sessions.",
+      },
+    ],
+  }),
+});
 
 const formatColor: Record<string, string> = {
   Strength: "border-blue-glow text-blue-glow",

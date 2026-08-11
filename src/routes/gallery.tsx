@@ -4,7 +4,19 @@ import { Photo } from "@/components/photo";
 import { TrialButton } from "@/components/cta";
 import { galleryPhotos } from "@/lib/gallery";
 
-export const Route = createFileRoute("/gallery")({ component: Gallery });
+export const Route = createFileRoute("/gallery")({
+  component: Gallery,
+  head: () => ({
+    meta: [
+      { title: "Gallery — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "Real members training real programming inside the KINETIX Performance Studio floor in Kukatpally, Hyderabad.",
+      },
+    ],
+  }),
+});
 
 function Gallery() {
   return (

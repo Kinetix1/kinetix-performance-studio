@@ -6,7 +6,19 @@ import { site } from "@/lib/site";
 import { TrialButton } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
 
-export const Route = createFileRoute("/membership")({ component: Membership });
+export const Route = createFileRoute("/membership")({
+  component: Membership,
+  head: () => ({
+    meta: [
+      { title: "Membership — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "Membership plans and pricing at KINETIX Performance Studio in Kukatpally, Hyderabad. Choose your commitment, all training included.",
+      },
+    ],
+  }),
+});
 
 function Membership() {
   const [open, setOpen] = useState<string | null>(faqs[0]?.q ?? null);

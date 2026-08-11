@@ -15,7 +15,19 @@ const coaches = [
   { photo: coach3, alt: "KINETIX coach in the studio" },
 ];
 
-export const Route = createFileRoute("/about")({ component: About });
+export const Route = createFileRoute("/about")({
+  component: About,
+  head: () => ({
+    meta: [
+      { title: "About — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "KINETIX Performance Studio is a results-driven performance community in Kukatpally, Hyderabad — science-backed programming, expert coaching and a community that keeps consistency high.",
+      },
+    ],
+  }),
+});
 
 const pillars = [
   {

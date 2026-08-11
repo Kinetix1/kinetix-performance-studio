@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
-import mark from "@/assets/kinetix-lockup.png";
+import mark from "@/assets/kinetix-lockup.webp";
 import { nav, site, trialLink } from "@/lib/site";
 import { CTA } from "@/components/cta";
 
@@ -15,8 +15,8 @@ export function Header() {
           <img
             src={mark}
             alt={`${site.name} logo`}
-            width={1214}
-            height={1050}
+            width={693}
+            height={600}
             className="h-20 w-auto"
           />
         </Link>

@@ -8,7 +8,19 @@ import kettlebellPhoto from "@/assets/gallery/member-kettlebell-floor-setup.webp
 import circuitPhoto from "@/assets/gallery/member-plank-medicine-balls-mural.webp";
 import { trainingFormats } from "@/lib/site";
 
-export const Route = createFileRoute("/programs")({ component: Programs });
+export const Route = createFileRoute("/programs")({
+  component: Programs,
+  head: () => ({
+    meta: [
+      { title: "Programs — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "HIIT, functional training, strength and conditioning programs at KINETIX Performance Studio in Kukatpally, Hyderabad — coached, structured and suitable for all levels.",
+      },
+    ],
+  }),
+});
 
 const programs = [
   {

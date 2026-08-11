@@ -1,16 +1,35 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Facebook, Instagram, MessageCircle, Clock, ArrowRight } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  MessageCircle,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
 import { site, whatsappLink } from "@/lib/site";
 import { schedule, formatSlot } from "@/lib/schedule";
 import { CTA } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
 
-export const Route = createFileRoute("/contact")({ component: Contact });
+export const Route = createFileRoute("/contact")({
+  component: Contact,
+  head: () => ({
+    meta: [
+      { title: "Contact — KINETIX Performance Studio" },
+      {
+        name: "description",
+        content:
+          "Get in touch with KINETIX Performance Studio in Kukatpally, Hyderabad — call, WhatsApp or visit the studio to book a free trial.",
+      },
+    ],
+  }),
+});
 
-const allSlots = Array.from(
-  new Set(schedule.flatMap((d) => d.slots.map((s) => formatSlot(s)))),
-);
+const allSlots = Array.from(new Set(schedule.flatMap((d) => d.slots.map((s) => formatSlot(s)))));
 
 const whatsappClicks = [
   { label: "Book a free trial", message: "Hi KINETIX, I'd like to book a free trial." },
@@ -55,7 +74,8 @@ function Contact() {
           Message us on WhatsApp
         </h1>
         <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-white/70">
-          The fastest way to reach KINETIX is WhatsApp. We reply during floor hours, and you can book a trial, ask about batches, or get membership details instantly.
+          The fastest way to reach KINETIX is WhatsApp. We reply during floor hours, and you can
+          book a trial, ask about batches, or get membership details instantly.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
@@ -87,7 +107,10 @@ function Contact() {
                 <p className="font-semibold text-white">{c.label}</p>
                 <p className="mono-label mt-1 text-sm text-white/50">Opens WhatsApp</p>
               </div>
-              <ArrowRight size={18} className="shrink-0 text-orange transition group-hover:translate-x-1" />
+              <ArrowRight
+                size={18}
+                className="shrink-0 text-orange transition group-hover:translate-x-1"
+              />
             </a>
           </Reveal>
         ))}
@@ -103,7 +126,12 @@ function Contact() {
                 </div>
                 <div>
                   <p className="mono-label text-white/50">Phone / WhatsApp</p>
-                  <a href={site.whatsapp} target="_blank" rel="noreferrer" className="text-lg font-semibold text-white hover:text-blue-glow">
+                  <a
+                    href={site.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-lg font-semibold text-white hover:text-blue-glow"
+                  >
                     {site.phoneDisplay}
                   </a>
                 </div>
@@ -114,7 +142,10 @@ function Contact() {
                 </div>
                 <div>
                   <p className="mono-label text-white/50">Email</p>
-                  <a href={`mailto:${site.email}`} className="break-all text-white/85 hover:text-blue-glow">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="break-all text-white/85 hover:text-blue-glow"
+                  >
                     {site.email}
                   </a>
                 </div>
@@ -174,14 +205,21 @@ function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <form onSubmit={onSubmit} noValidate className="rounded-[4px] border border-navy-line p-6 lg:p-8">
+          <form
+            onSubmit={onSubmit}
+            noValidate
+            className="rounded-[4px] border border-navy-line p-6 lg:p-8"
+          >
             <h2 className="display skew-cut text-[28px]">Book a free trial</h2>
             <p className="mt-3 text-[15px] text-white/65">
-              Fill this in and we'll open WhatsApp with your details ready to send. No data is stored here.
+              Fill this in and we'll open WhatsApp with your details ready to send. No data is
+              stored here.
             </p>
 
             <div className="mt-6">
-              <label htmlFor="name" className="mono-label text-white/70">Name</label>
+              <label htmlFor="name" className="mono-label text-white/70">
+                Name
+              </label>
               <input
                 id="name"
                 className={field}
@@ -192,12 +230,16 @@ function Contact() {
                 placeholder="Your name"
               />
               {errors.name && (
-                <p id="name-error" className="mono-label mt-2 text-orange">{errors.name}</p>
+                <p id="name-error" className="mono-label mt-2 text-orange">
+                  {errors.name}
+                </p>
               )}
             </div>
 
             <div className="mt-5">
-              <label htmlFor="phone" className="mono-label text-white/70">Mobile number</label>
+              <label htmlFor="phone" className="mono-label text-white/70">
+                Mobile number
+              </label>
               <input
                 id="phone"
                 inputMode="numeric"
@@ -209,12 +251,16 @@ function Contact() {
                 placeholder="10-digit number"
               />
               {errors.phone && (
-                <p id="phone-error" className="mono-label mt-2 text-orange">{errors.phone}</p>
+                <p id="phone-error" className="mono-label mt-2 text-orange">
+                  {errors.phone}
+                </p>
               )}
             </div>
 
             <div className="mt-5">
-              <label htmlFor="goal" className="mono-label text-white/70">What are you training for?</label>
+              <label htmlFor="goal" className="mono-label text-white/70">
+                What are you training for?
+              </label>
               <textarea
                 id="goal"
                 rows={3}
@@ -226,12 +272,16 @@ function Contact() {
                 placeholder="Get stronger, get consistent, drop the desk stiffness…"
               />
               {errors.goal && (
-                <p id="goal-error" className="mono-label mt-2 text-orange">{errors.goal}</p>
+                <p id="goal-error" className="mono-label mt-2 text-orange">
+                  {errors.goal}
+                </p>
               )}
             </div>
 
             <div className="mt-5">
-              <label htmlFor="batch" className="mono-label text-white/70">Preferred batch</label>
+              <label htmlFor="batch" className="mono-label text-white/70">
+                Preferred batch
+              </label>
               <select
                 id="batch"
                 className={field}
@@ -258,4 +308,3 @@ function Contact() {
     </div>
   );
 }
-

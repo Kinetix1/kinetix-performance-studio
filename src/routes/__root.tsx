@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Outlet, Link, createRootRoute, useRouter } from "@tanstack/react-router";
+import { Outlet, Link, HeadContent, createRootRoute, useRouter } from "@tanstack/react-router";
 import { Header, MobileCallBar } from "../components/header";
 import { Footer } from "../components/footer";
 
@@ -33,10 +33,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
       <div className="max-w-md text-center">
         <p className="mono-label text-orange">Error</p>
         <h1 className="display skew-cut mt-4 text-[40px]">Something broke.</h1>
-        <p className="mt-3 text-white/70">Something went wrong. Try again or head back to the floor.</p>
+        <p className="mt-3 text-white/70">
+          Something went wrong. Try again or head back to the floor.
+        </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="mono-label inline-flex items-center justify-center rounded-[2px] bg-orange px-6 py-3 text-white transition-colors hover:bg-amber"
           >
             Try again
@@ -62,6 +67,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
+      <HeadContent />
       <Header />
       <main>
         <Outlet />

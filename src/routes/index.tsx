@@ -32,7 +32,19 @@ import { Reveal } from "@/components/reveal";
 import { site, sessionJourney, trainingFormats } from "@/lib/site";
 import { plans, inr, inclusionLine } from "@/lib/plans";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+  head: () => ({
+    meta: [
+      { title: "KINETIX Performance Studio — Kukatpally, Hyderabad" },
+      {
+        name: "description",
+        content:
+          "Not a gym. A performance community. Coach-led HIIT, functional and strength training in Kukatpally, Hyderabad — 45-60 minute sessions, all fitness levels.",
+      },
+    ],
+  }),
+});
 
 const differentiators = [
   {
