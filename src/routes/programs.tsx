@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/reveal";
 import { TrialButton } from "@/components/cta";
 import { Photo } from "@/components/photo";
-import strengthPhoto from "@/assets/gallery/member-barbell-deadlift-setup-2.webp";
-import conditioningPhoto from "@/assets/gallery/member-band-chest-row.webp";
+import strengthPhoto from "@/assets/gallery/member-barbell-deadlift-female.jpg";
+import conditioningPhoto from "@/assets/gallery/member-lunge-with-weight.jpg";
 import kettlebellPhoto from "@/assets/gallery/member-kettlebell-floor-setup.webp";
-import circuitPhoto from "@/assets/gallery/member-plank-medicine-balls-mural.webp";
+import circuitPhoto from "@/assets/gallery/member-barbell-deadlift-pull.jpg";
 import { trainingFormats } from "@/lib/site";
 
 export const Route = createFileRoute("/programs")({

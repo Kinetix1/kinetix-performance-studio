@@ -11,19 +11,19 @@ import {
   Users,
   CheckCircle2,
 } from "lucide-react";
-import heroAthlete from "@/assets/hero-kettlebell-overhead-swing.webp";
-import strengthPhoto from "@/assets/barbell-deadlift-setup.webp";
-import conditioningPhoto from "@/assets/rowing-machine-conditioning.webp";
+import heroAthlete from "@/assets/hero-barbell-overhead-press.jpg";
+import strengthPhoto from "@/assets/gallery/member-deadlift-setup.jpg";
+import conditioningPhoto from "@/assets/gallery/member-lunge-conditioning.jpg";
 import communityPhoto from "@/assets/studio-mural-band-training.webp";
-import membersPhoto from "@/assets/barbell-front-squat-studio.webp";
+import membersPhoto from "@/assets/gallery/member-barbell-overhead-press-male.jpg";
 import galleryKettlebellSwing from "@/assets/gallery/member-kettlebell-swing.webp";
-import galleryBarbellPress from "@/assets/gallery/member-barbell-overhead-press.webp";
-import galleryGobletSquat from "@/assets/gallery/member-medicine-ball-goblet-squat.webp";
+import galleryBarbellPress from "@/assets/gallery/member-barbell-overhead-press-female.jpg";
+import galleryGobletSquat from "@/assets/gallery/member-barbell-deadlift-female.jpg";
 import galleryBandTraining from "@/assets/gallery/member-band-pull-overhead-mural.webp";
-import galleryDumbbellSquat from "@/assets/gallery/member-dual-dumbbell-squat.webp";
+import galleryDumbbellSquat from "@/assets/gallery/member-lunge-with-weight.jpg";
 import galleryFarmersCarry from "@/assets/gallery/member-kettlebell-farmers-carry.webp";
-import galleryCoreWork from "@/assets/gallery/member-plank-medicine-ball-mural.webp";
-import gallerySandbagCarry from "@/assets/gallery/member-sandbag-carry.webp";
+import galleryCoreWork from "@/assets/gallery/member-core-ab-work.jpg";
+import gallerySandbagCarry from "@/assets/gallery/member-box-step-mobility.jpg";
 import { Photo } from "@/components/photo";
 
 import { BatchBoard } from "@/components/batch-board";
@@ -106,13 +106,13 @@ const galleryHighlights = [
   },
   {
     src: galleryBarbellPress,
-    alt: "Member pressing a barbell overhead in front of the KINETIX mural",
+    alt: "Member pressing a barbell overhead",
     label: "Barbell Press",
   },
   {
     src: galleryGobletSquat,
-    alt: "Member holding a medicine ball goblet squat",
-    label: "Goblet Squat",
+    alt: "Member setting up for a barbell deadlift",
+    label: "Deadlift",
   },
   {
     src: galleryBandTraining,
@@ -121,8 +121,8 @@ const galleryHighlights = [
   },
   {
     src: galleryDumbbellSquat,
-    alt: "Member holding a dual dumbbell rack squat",
-    label: "Dumbbell Squat",
+    alt: "Member performing a lunge with weight",
+    label: "Weighted Lunge",
   },
   {
     src: galleryFarmersCarry,
@@ -131,13 +131,13 @@ const galleryHighlights = [
   },
   {
     src: galleryCoreWork,
-    alt: "Member holding a plank on a medicine ball in front of the KINETIX mural",
+    alt: "Member working core and ab exercises",
     label: "Core Work",
   },
   {
     src: gallerySandbagCarry,
-    alt: "Member carrying a sandbag on the studio floor",
-    label: "Sandbag Carry",
+    alt: "Member on a box step mobility drill",
+    label: "Box Step",
   },
 ];
 

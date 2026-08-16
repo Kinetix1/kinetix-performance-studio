@@ -39,8 +39,8 @@ export function whatsappLink(message: string) {
 export function trialLink(slotLabel?: string) {
   return whatsappLink(
     slotLabel
-      ? `Hi KINETIX, I'd like to book a free trial for the ${slotLabel} batch.`
-      : `Hi KINETIX, I'd like to book a free trial.`,
+      ? `Hi KINETIX! 👋 I'd like to book a free trial for the ${slotLabel} batch.`
+      : `Hi KINETIX! 👋 I'd like to book a free trial. Please let me know the available slots.`,
   );
 }
 

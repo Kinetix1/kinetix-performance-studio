@@ -56,7 +56,7 @@ function Contact() {
 
     window.open(
       whatsappLink(
-        `Hi KINETIX, I'm ${values.name.trim()} (${values.phone.trim()}). My goal: ${values.goal.trim()}. Preferred batch: ${values.batch}. I'd like to book a free trial.`,
+        `Hi KINETIX! 👋\nName: ${values.name.trim()}\nPhone: ${values.phone.trim()}\nGoal: ${values.goal.trim()}\nPreferred batch: ${values.batch}\n\nI'd like to book a free trial.`,
       ),
       "_blank",
       "noopener",
@@ -79,7 +79,7 @@ function Contact() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4">
-          <a href={site.whatsapp} target="_blank" rel="noreferrer" className="inline-block">
+          <a href={whatsappLink("Hi KINETIX, I'd like to book a free trial.")} target="_blank" rel="noreferrer" className="inline-block">
             <CTA className="px-8 py-4">
               <MessageCircle size={20} className="inline-block align-text-bottom" />
               <span className="ml-2">Start a WhatsApp chat</span>
@@ -127,7 +127,7 @@ function Contact() {
                 <div>
                   <p className="mono-label text-white/50">Phone / WhatsApp</p>
                   <a
-                    href={site.whatsapp}
+                    href={whatsappLink("Hi KINETIX, I'd like to get in touch.")}
                     target="_blank"
                     rel="noreferrer"
                     className="text-lg font-semibold text-white hover:text-blue-glow"

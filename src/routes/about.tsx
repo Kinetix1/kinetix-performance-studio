@@ -4,16 +4,7 @@ import { site } from "@/lib/site";
 import { Reveal } from "@/components/reveal";
 import { TrialButton } from "@/components/cta";
 import { Photo } from "@/components/photo";
-import studioFloor from "@/assets/studio-floor-equipment-rack.webp";
-import coach1 from "@/assets/coach-1.jpg";
-import coach2 from "@/assets/coach-2.jpg";
-import coach3 from "@/assets/coach-3.jpg";
-
-const coaches = [
-  { photo: coach1, alt: "KINETIX coach in the studio" },
-  { photo: coach2, alt: "KINETIX coach in the studio" },
-  { photo: coach3, alt: "KINETIX coach in the studio" },
-];
+import studioFloor from "@/assets/gallery/member-barbell-overhead-press-male.jpg";
 
 export const Route = createFileRoute("/about")({
   component: About,
@@ -115,13 +106,20 @@ function About() {
             rep and keep the room honest. The standard doesn't drop because the team doesn't let it.
           </p>
         </Reveal>
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          {coaches.map((c, i) => (
-            <Reveal key={c.photo} delay={i * 0.05}>
-              <Photo src={c.photo} alt={c.alt} width={912} height={1120} ratio="aspect-[4/5]" />
-            </Reveal>
-          ))}
-        </div>
+        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {[
+              { label: "Expert-led", body: "Every session is run by coaches who know the programme inside out and hold the standard on every rep." },
+              { label: "Always watching", body: "Your form, your load, your pace — coaches are on the floor the entire session, not behind a desk." },
+              { label: "No drop in standards", body: "The room stays honest because the team doesn't let it slip. That's the only way the results hold." },
+            ].map((item, i) => (
+              <Reveal key={item.label} delay={i * 0.05}>
+                <div className="rounded-[4px] border border-navy-line bg-ink p-6">
+                  <p className="mono-label text-orange">{item.label}</p>
+                  <p className="mt-3 text-[15px] text-white/70">{item.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
       </section>
 
       <section className="bg-paper py-20 text-ink">
