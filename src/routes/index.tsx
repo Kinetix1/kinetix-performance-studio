@@ -11,7 +11,7 @@ import {
   Users,
   CheckCircle2,
 } from "lucide-react";
-import heroAthlete from "@/assets/hero-barbell-overhead-press.jpg";
+import heroAthlete from "@/assets/hero-member-deadlift.jpg";
 import strengthPhoto from "@/assets/gallery/member-deadlift-setup.jpg";
 import conditioningPhoto from "@/assets/gallery/member-lunge-conditioning.jpg";
 import communityPhoto from "@/assets/studio-mural-band-training.webp";
@@ -81,7 +81,7 @@ const differentiators = [
 
 const stats = [
   { value: "45–60", unit: "MIN", label: "Every session, coach to cool-down" },
-  { value: "12", unit: "MAX", label: "Members per coached batch" },
+  { value: "30", unit: "MAX", label: "Members per batch, 2–3 trainers on the floor" },
   { value: "6", unit: "AM", label: "First batch on the floor" },
   { value: "6", unit: "DAYS", label: "Monday to Saturday training" },
 ];
@@ -168,6 +168,10 @@ const faqs = [
     a: "Yes. Your coach demos every movement and sets loads and options for your level, so a first session is demanding without being reckless.",
   },
   {
+    q: "How big is a batch?",
+    a: "Up to 30 members per batch with 2–3 trainers on the floor every session — so you always have a coach watching your form.",
+  },
+  {
     q: "How long is a session?",
     a: "45 minutes Monday to Friday, 60 minutes on Saturday — introduction, demo, warm-up, workout, finisher and cool-down, every time.",
   },
@@ -232,7 +236,7 @@ function Home() {
             />
             <Photo
               src={heroAthlete}
-              alt="Member driving a kettlebell overhead swing during a KINETIX session"
+              alt="Member setting up for a barbell deadlift during a KINETIX session"
               width={720}
               height={1280}
               ratio="aspect-[4/5]"
