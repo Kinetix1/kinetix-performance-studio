@@ -188,7 +188,9 @@ function Contact() {
               </a>
               <a
                 href={site.socials.instagram}
-                aria-label="KINETIX on Instagram (link pending)"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="KINETIX on Instagram"
                 className="rounded-[2px] border border-navy-line p-3 hover:border-blue-glow"
               >
                 <Instagram size={18} />

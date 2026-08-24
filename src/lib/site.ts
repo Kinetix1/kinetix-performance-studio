@@ -23,7 +23,7 @@ export const site = {
   socials: {
     facebook: "https://www.facebook.com/share/19D3HsmoNN/",
     // TODO: client sent a Facebook URL by mistake — replace with the real Instagram profile URL.
-    instagram: "#",
+    instagram: "https://www.instagram.com/kinetix.kukatpally/",
   },
   floorHours: [
     { days: "Monday – Friday", hours: "6:00 – 10:00 AM · 5:00 – 8:00 PM" },

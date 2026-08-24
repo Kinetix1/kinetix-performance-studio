@@ -55,10 +55,11 @@ export function Footer() {
             >
               <Facebook size={16} />
             </a>
-            {/* TODO: replace "#" with the real Instagram URL — client supplied a Facebook link by mistake. */}
             <a
               href={site.socials.instagram}
-              aria-label="KINETIX on Instagram (link pending)"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="KINETIX on Instagram"
               className="rounded-[2px] border border-navy-line p-2 hover:border-blue-glow"
             >
               <Instagram size={16} />
