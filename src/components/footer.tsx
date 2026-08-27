@@ -81,10 +81,19 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 max-w-6xl border-t border-navy-line px-5 pt-6">
+      <div className="mx-auto mt-12 max-w-6xl border-t border-navy-line px-5 pt-6 flex items-center justify-between flex-wrap gap-3">
         <p className="mono-label text-white/40">
           © {new Date().getFullYear()} {site.name}
         </p>
+        <a
+          href="https://www.staffarc.in/"
+          target="_blank"
+          rel="noreferrer"
+          className="mono-label flex items-center gap-1.5 text-white/40 transition-colors hover:text-white/70"
+        >
+          MADE WITH <span className="text-orange">♥</span> BY{" "}
+          <span className="text-blue-glow hover:text-white transition-colors">STAFFARC</span>
+        </a>
       </div>
     </footer>
   );
