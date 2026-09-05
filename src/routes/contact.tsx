@@ -14,6 +14,7 @@ import { site, whatsappLink } from "@/lib/site";
 import { schedule, formatSlot } from "@/lib/schedule";
 import { CTA } from "@/components/cta";
 import { Reveal } from "@/components/reveal";
+import { pixelLead } from "@/lib/pixel";
 
 export const Route = createFileRoute("/contact")({
   component: Contact,
@@ -54,6 +55,7 @@ function Contact() {
     setErrors(next);
     if (Object.keys(next).length) return;
 
+    pixelLead();
     window.open(
       whatsappLink(
         `Hi KINETIX! 👋\nName: ${values.name.trim()}\nPhone: ${values.phone.trim()}\nGoal: ${values.goal.trim()}\nPreferred batch: ${values.batch}\n\nI'd like to book a free trial.`,

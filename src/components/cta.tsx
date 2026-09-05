@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { trialLink } from "@/lib/site";
+import { pixelLead } from "@/lib/pixel";
 
 type Props = {
   children: ReactNode;
@@ -35,7 +36,7 @@ export function TrialButton({
   children?: ReactNode;
 }) {
   return (
-    <a href={trialLink(slotLabel)} target="_blank" rel="noreferrer" className="inline-block">
+    <a href={trialLink(slotLabel)} target="_blank" rel="noreferrer" className="inline-block" onClick={pixelLead}>
       <CTA variant={variant} className={className}>
         {children}
       </CTA>
